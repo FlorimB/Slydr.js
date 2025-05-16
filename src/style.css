@@ -1,0 +1,63 @@
+:root {
+  --slider-width: 100%;
+  --slides-per-page: 3;
+  --gap: 24px;
+  --total-gap: calc((var(--slides-per-page) - 1) * var(--gap) * 2);
+  --slides-width: calc((100% - var(--total-gap)) / var(--slides-per-page));
+  --transformed-slide: translate3d(0, 0, 0);
+}
+
+.slider-container {
+  width: var(--slider-width);
+
+  .carousel {
+    @apply w-full overflow-hidden;
+  }
+
+  .carousel:active {
+    @apply cursor-pointer;
+  }
+
+  .slides {
+    width: var(--slides-width);
+    flex-shrink: 0;
+  }
+
+  .slider {
+    @apply flex h-full;
+    transform: var(--transformed-slide);
+    gap: var(--gap);
+    transition: transform 0.5s ease-in-out;
+    will-change: transform;
+  }
+
+  .controls {
+    @apply flex gap-4;
+
+    .prev,
+    .next {
+      @apply w-8 h-8 rounded-full bg-slate-100 flex justify-center items-center hover:bg-slate-200;
+    }
+  }
+
+  .pagination:not(.menu) {
+    @apply w-max h-auto bg-slate-100 p-2 flex items-center gap-1 rounded-full;
+  }
+
+  .pagination:not(.menu) button {
+    @apply w-1.5 h-1.5 rounded-full bg-slate-400 cursor-pointer;
+  }
+
+
+  .pagination:not(.menu) .active {
+    @apply bg-blue-500 transform scale-150;
+  }
+
+  .pagination.menu .active {
+    @apply bg-slate-900 text-slate-50;
+  }
+}
+
+.show-lightbox {
+  @apply fixed top-0 left-0 w-full h-full z-50;
+}
